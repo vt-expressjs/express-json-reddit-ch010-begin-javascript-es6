@@ -6,19 +6,24 @@ var router = express.Router();
 //   res.render('index', { title: 'Express' });
 // });
 
-router.get('/hello.json', function (req, res, next) {
-    res.json({
-        "api":"/hello.json",
-        name: 'hello'
-    })
-})
+let url = 'https://express-json-reddit-ch010-begi.herokuapp.com/'
 
+router.get('/.json',
+    function (req, res, next) {
 
-router.get('/.json', function (req, res, next) {
-    res.json({
-        "api":"/.json",
-        "url": "hello"
+        res.json({
+            "api": "/.json",
+            "url": `${url}hello`
+        })
     })
-})
+
+router.get('/:urlName.json',
+    function (req, res, next) {
+    let urlName = req.params["urlName"]
+        res.json({
+            "api": `/${urlName}.json`,
+            "name": `${urlName}`
+        })
+    })
 
 module.exports = router;
